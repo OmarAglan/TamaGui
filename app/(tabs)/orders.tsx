@@ -1,4 +1,5 @@
 import {
+  Badge,
   Calendar,
   CheckCircle,
   Clock,
@@ -10,7 +11,6 @@ import {
 } from '@tamagui/lucide-icons';
 import React, { useState } from 'react';
 import {
-  Badge,
   Button,
   Card,
   H1,
@@ -22,7 +22,6 @@ import {
   XStack,
   YStack,
 } from 'tamagui';
-
 interface Order {
   id: string;
   customerName: string;
@@ -93,7 +92,7 @@ export default function OrdersScreen() {
     switch (status) {
       case 'delivered': return '$green9';
       case 'shipped': return '$blue9';
-      case 'processing': return '$orange9';
+      case 'processing': return '$blue9';
       case 'pending': return '$yellow9';
       case 'cancelled': return '$red9';
       default: return '$gray9';
@@ -221,7 +220,7 @@ export default function OrdersScreen() {
             </Card>
             <Card flex={1} padding="$3" backgroundColor="$background" bordered>
               <YStack alignItems="center" space="$1">
-                <Text fontSize="$6" fontWeight="700" color="$orange11">
+                <Text fontSize="$6" fontWeight="700" color="$blue11">
                   {orderStats.pending + orderStats.processing}
                 </Text>
                 <Text fontSize="$2" color="$color11">

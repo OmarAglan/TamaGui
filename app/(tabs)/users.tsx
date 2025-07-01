@@ -1,4 +1,5 @@
 import {
+  Badge,
   Filter,
   Mail,
   MapPin,
@@ -10,7 +11,6 @@ import {
 import React, { useState } from 'react';
 import {
   Avatar,
-  Badge,
   Button,
   Card,
   H1,
@@ -22,7 +22,6 @@ import {
   XStack,
   YStack,
 } from 'tamagui';
-
 interface User {
   id: string;
   name: string;
@@ -92,7 +91,7 @@ export default function UsersScreen() {
     switch (status) {
       case 'active': return '$green9';
       case 'inactive': return '$red9';
-      case 'pending': return '$orange9';
+      case 'pending': return '$blue9';
       default: return '$gray9';
     }
   };

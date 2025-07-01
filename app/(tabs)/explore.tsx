@@ -14,8 +14,19 @@ import {
 // import { YStack, XStack, Text, Input, Button, Card, H3, Paragraph, ScrollView } from 'tamagui';
 
 const ProfessionalTable = () => {
+  interface Employee {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    status: string;
+    joinDate: string;
+    department: string;
+    salary: number;
+  }
+
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortField, setSortField] = useState('');
+  const [sortField, setSortField] = useState<keyof Employee>('name');
   const [sortDirection, setSortDirection] = useState('asc');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -36,7 +47,7 @@ const ProfessionalTable = () => {
   };
 
   // Sample data - replace with your actual data
-  const sampleData = [
+  const sampleData: Employee[] = [
     {
       id: 1,
       name: 'John Doe',
@@ -120,7 +131,7 @@ const ProfessionalTable = () => {
         let bValue = b[sortField];
         
         // Handle different data types
-        if (typeof aValue === 'string') {
+        if (typeof aValue === 'string' && typeof bValue === 'string') {
           aValue = aValue.toLowerCase();
           bValue = bValue.toLowerCase();
         }
@@ -141,7 +152,7 @@ const ProfessionalTable = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedData = filteredAndSortedData.slice(startIndex, startIndex + itemsPerPage);
 
-  const handleSort = (field) => {
+  const handleSort = (field: keyof Employee) => {
     if (sortField === field) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
     } else {
@@ -150,13 +161,13 @@ const ProfessionalTable = () => {
     }
   };
 
-  const handleAction = (action, item) => {
+  const handleAction = (action: 'view' | 'edit' | 'delete', item: Employee) => {
     console.log(`${action} action for:`, item);
     // Implement your action logic here
   };
 
-  const getStatusBadge = (status) => {
-    const statusConfig = {
+  const getStatusBadge = (status: string) => {
+    const statusConfig: Record<string, { color: string; backgroundColor: string }> = {
       active: { color: '$green10', backgroundColor: '$green3' },
       inactive: { color: '$red10', backgroundColor: '$red3' },
       pending: { color: '$blue1', backgroundColor: '$blue1' },
@@ -180,7 +191,7 @@ const ProfessionalTable = () => {
     );
   };
 
-  const formatSalary = (salary) => {
+  const formatSalary = (salary: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -303,7 +314,7 @@ const ProfessionalTable = () => {
                     alignItems="center"
                     justifyContent="space-between"
                     pressStyle={{ backgroundColor: '$gray3' }}
-                    onPress={column.sortable ? () => handleSort(column.key) : undefined}
+                    onPress={column.sortable ? () => handleSort(column.key as keyof Employee) : undefined}
                   >
                     <Text fontSize="$3" fontWeight="600" color="$color">
                       {column.label}
