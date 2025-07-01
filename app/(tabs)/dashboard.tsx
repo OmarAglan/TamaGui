@@ -1,32 +1,32 @@
 import {
-    Activity,
-    BarChart3,
-    Bell,
-    DollarSign,
-    Home,
-    LogOut,
-    Menu,
-    Settings,
-    ShoppingCart,
-    TrendingUp,
-    Users,
+  Activity,
+  BarChart3,
+  Bell,
+  DollarSign,
+  Home,
+  LogOut,
+  Menu,
+  Settings,
+  ShoppingCart,
+  TrendingUp,
+  Users,
 } from '@tamagui/lucide-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    Avatar,
-    Button,
-    Card,
-    H1,
-    H2,
-    H3,
-    Paragraph,
-    ScrollView,
-    Separator,
-    Sheet,
-    Text,
-    XStack,
-    YStack,
+  Avatar,
+  Button,
+  Card,
+  H1,
+  H2,
+  H3,
+  Paragraph,
+  ScrollView,
+  Separator,
+  Sheet,
+  Text,
+  XStack,
+  YStack,
 } from 'tamagui';
 
 interface DashboardStats {
@@ -36,6 +36,7 @@ interface DashboardStats {
   trend: 'up' | 'down';
   icon: any;
   color: string;
+  backgroundColor: string;
 }
 
 const stats: DashboardStats[] = [
@@ -45,7 +46,8 @@ const stats: DashboardStats[] = [
     change: '+20.1%',
     trend: 'up',
     icon: DollarSign,
-    color: '$green10',
+    color: '$green9',
+    backgroundColor: '$green3',
   },
   {
     title: 'Active Users',
@@ -53,7 +55,8 @@ const stats: DashboardStats[] = [
     change: '+180.1%',
     trend: 'up',
     icon: Users,
-    color: '$blue10',
+    color: '$blue9',
+    backgroundColor: '$blue3',
   },
   {
     title: 'Sales',
@@ -61,7 +64,8 @@ const stats: DashboardStats[] = [
     change: '+19%',
     trend: 'up',
     icon: ShoppingCart,
-    color: '$purple10',
+    color: '$purple9',
+    backgroundColor: '$purple3',
   },
   {
     title: 'Active Now',
@@ -69,7 +73,8 @@ const stats: DashboardStats[] = [
     change: '+201',
     trend: 'up',
     icon: Activity,
-    color: '$orange10',
+    color: '$orange9',
+    backgroundColor: '$orange3',
   },
 ];
 
@@ -81,77 +86,33 @@ const sidebarItems = [
   { icon: Settings, label: 'Settings', active: false },
 ];
 
-// Sample data for the table
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-  status: 'Active' | 'Inactive';
-  lastLogin: string;
-}
-
-const sampleUsers: User[] = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active', lastLogin: '2024-01-15' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active', lastLogin: '2024-01-14' },
-  { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Editor', status: 'Inactive', lastLogin: '2024-01-10' },
-  { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'User', status: 'Active', lastLogin: '2024-01-13' },
-  { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', role: 'Admin', status: 'Active', lastLogin: '2024-01-15' },
-];
-
-const userColumns: TableColumn<User>[] = [
-  { key: 'name', title: 'Name', sortable: true },
-  { key: 'email', title: 'Email', sortable: true },
-  { key: 'role', title: 'Role', sortable: true },
-  {
-    key: 'status',
-    title: 'Status',
-    sortable: true,
-    render: (value) => (
-      <Text
-        color={value === 'Active' ? '$green10' : '$red10'}
-        fontWeight="600"
-      >
-        {value}
-      </Text>
-    )
-  },
-  { key: 'lastLogin', title: 'Last Login', sortable: true },
-];
-
 export default function DashboardScreen() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     // In real app, clear auth state
-    router.push('/login');
+    router.push('/(tabs)/login');
   };
 
   const StatCard = ({ stat }: { stat: DashboardStats }) => (
-    <Card flex={1} padding="$4" backgroundColor="$background" bordered>
-      <XStack justifyContent="space-between" alignItems="flex-start">
+    <Card flex={1} padding="$4" bordered>
+      <XStack space="$3">
         <YStack space="$1" flex={1}>
-          <Text fontSize="$3" color="$color11">
+          <Text fontSize="$3">
             {stat.title}
           </Text>
           <H2 fontSize="$7" fontWeight="700">
             {stat.value}
           </H2>
-          <XStack alignItems="center" space="$1">
-            <TrendingUp size={12} color={stat.color} />
-            <Text fontSize="$2" color={stat.color}>
+          <XStack space="$1">
+            <TrendingUp size={12} />
+            <Text fontSize="$2">
               {stat.change} from last month
             </Text>
           </XStack>
         </YStack>
-        <YStack
-          backgroundColor={`${stat.color}15`}
-          padding="$2"
-          borderRadius="$3"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <stat.icon size={20} color={stat.color} />
+        <YStack padding="$2">
+          <stat.icon size={20} />
         </YStack>
       </XStack>
     </Card>
@@ -325,19 +286,6 @@ export default function DashboardScreen() {
                   View Analytics
                 </Button>
               </XStack>
-            </YStack>
-
-            {/* Users Table */}
-            <YStack space="$4">
-              <H3>Recent Users</H3>
-              <ProTable
-                data={sampleUsers}
-                columns={userColumns}
-                onEdit={(user) => console.log('Edit user:', user)}
-                onDelete={(user) => console.log('Delete user:', user)}
-                onView={(user) => console.log('View user:', user)}
-                pageSize={5}
-              />
             </YStack>
           </YStack>
         </ScrollView>
