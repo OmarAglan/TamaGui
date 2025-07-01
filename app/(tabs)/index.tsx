@@ -51,6 +51,13 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Step 4: Try Tamagui</ThemedText>
+        <ThemedText>
+          Below you'll see Tamagui components in action. Tamagui provides beautiful, performant UI components that work across web and native.
+        </ThemedText>
+        <TamaguiExample />
+      </ThemedView>
     </ParallaxScrollView>
   );
 }
