@@ -21,6 +21,10 @@ const MAPPING = {
   'tablecells': 'table-chart',
   'person.circle': 'account-circle',
   'chart.bar.fill': 'bar-chart',
+  'chart.line.uptrend.xyaxis': 'analytics',
+  'person.2.fill': 'people',
+  'bag.fill': 'shopping-bag',
+  'gearshape.fill': 'settings',
 } as IconMapping;
 
 /**
