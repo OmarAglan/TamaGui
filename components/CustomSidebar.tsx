@@ -1,7 +1,7 @@
-import { LogOut } from '@tamagui/lucide-icons';
+import { LogOut, Search } from '@tamagui/lucide-icons';
 import { router } from 'expo-router';
-import React from 'react';
-import { Button, Separator, Text, useTheme, XStack, YStack } from 'tamagui';
+import React, { useState } from 'react';
+import { Button, Input, Separator, Text, useTheme, XStack, YStack } from 'tamagui';
 
 interface CustomSidebarProps {
   state: any;
@@ -11,6 +11,8 @@ interface CustomSidebarProps {
 
 export function CustomSidebar({ state, descriptors, navigation }: CustomSidebarProps) {
   const theme = useTheme();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isDashboardExpanded, setIsDashboardExpanded] = useState(true);
 
   const handleLogout = () => {
     // Navigate to login and reset the navigation stack
@@ -19,21 +21,42 @@ export function CustomSidebar({ state, descriptors, navigation }: CustomSidebarP
 
   return (
     <YStack
-      width={250}
+      width={280}
       height="100%"
       backgroundColor="$background"
       borderRightWidth={1}
       borderRightColor="$borderColor"
       padding="$4"
-      space="$2"
+      space="$4"
     >
-      {/* Header */}
-      <YStack space="$4" marginBottom="$6">
-        <Text fontSize="$6" fontWeight="bold" color="$color12">
-          TamaGui
+      {/* Logo */}
+      <YStack marginBottom="$4">
+        <Text fontSize="$7" fontWeight="bold" color="$green10">
+          ERP
         </Text>
-        <Separator />
       </YStack>
+
+      {/* Search Bar */}
+      <XStack
+        backgroundColor="$blue2"
+        borderRadius="$4"
+        paddingHorizontal="$3"
+        paddingVertical="$2"
+        alignItems="center"
+        space="$2"
+        marginBottom="$4"
+      >
+        <Search size={16} color="$blue10" />
+        <Input
+          flex={1}
+          placeholder="Search..."
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          backgroundColor="transparent"
+          borderWidth={0}
+          fontSize="$3"
+        />
+      </XStack>
 
       {/* Navigation Items */}
       <YStack space="$1" flex={1}>
@@ -82,7 +105,7 @@ export function CustomSidebar({ state, descriptors, navigation }: CustomSidebarP
                 onPress={onPress}
                 onLongPress={onLongPress}
                 paddingHorizontal="$3"
-                paddingVertical="$3"
+                paddingVertical="$3"blue
                 hoverStyle={{
                   backgroundColor: isFocused ? '$blue5' : '$color3',
                 }}
