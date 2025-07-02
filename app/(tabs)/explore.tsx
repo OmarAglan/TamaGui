@@ -400,8 +400,9 @@ const ProfessionalTable = () => {
         backgroundColor="white"
         borderRadius="$4"
         borderWidth={1}
-        borderColor="$blue4"
-        overflow="hidden"
+        borderColor="$blue6"
+        overflow="scroll"
+
         shadowColor="$shadowColor"
         shadowOffset={{ width: 0, height: 2 }}
         shadowOpacity={0.1}
@@ -411,7 +412,7 @@ const ProfessionalTable = () => {
           <YStack minWidth="100%">
             {/* Table Header */}
             <XStack
-              backgroundColor="$blue3"
+              backgroundColor="$red1"
               borderBottomWidth={1}
               borderBottomColor="$blue5"
               paddingVertical="$3"
